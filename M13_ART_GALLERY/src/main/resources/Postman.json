@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "eb1d0cef-20bc-46b8-ac46-04659eb5fa9a",
+		"name": "M13_Art_Gallery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops?name=GhostShop&adress=Nowhere 00&cap=1500",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "GhostShop"
+						},
+						{
+							"key": "adress",
+							"value": "Nowhere 00"
+						},
+						{
+							"key": "cap",
+							"value": "1500"
+						}
+					]
+				},
+				"description": "Create a new Store.\r\n\r\nParameters:\r\n*name(String)\r\n*adress(String)\r\n*cap(int)"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Picture",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops/2/pictures?title=Girl with a Pearl Earring&author=Johannes Vermeer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops",
+						"2",
+						"pictures"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Girl with a Pearl Earring"
+						},
+						{
+							"key": "author",
+							"value": "Johannes Vermeer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Shop by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all stores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pictures by store id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api//shops/2/pictures",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"",
+						"shops",
+						"2",
+						"pictures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get picture by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api//shops/2/picture",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"",
+						"shops",
+						"2",
+						"picture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Burn pictures by shop_id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops/1/pictures",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops",
+						"1",
+						"pictures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete picture by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops/3/picture",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops",
+						"3",
+						"picture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Store",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops/1?name=AnotherName&adress=Wemovetootherlocation 4cops&cap=50",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops",
+						"1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "AnotherName"
+						},
+						{
+							"key": "adress",
+							"value": "Wemovetootherlocation 4cops"
+						},
+						{
+							"key": "cap",
+							"value": "50"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Picture",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/shops/4/picture?title=WhiteArtGallery&author=Piero&store_id=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"shops",
+						"4",
+						"picture"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "WhiteArtGallery"
+						},
+						{
+							"key": "author",
+							"value": "Piero"
+						},
+						{
+							"key": "store_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
