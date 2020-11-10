@@ -61,6 +61,13 @@ public class Picture{
 		this.date = new Date();
 		this.store = store;
 	}
+	
+
+	private Picture(String title, String author, Date date) {
+		this.title = title;
+		this.author = author;
+		this.date = date;
+	}
 
 	public Long getId() {
 		return id;
@@ -113,3 +120,6 @@ public class Picture{
 	}
 
 }
+
+
+

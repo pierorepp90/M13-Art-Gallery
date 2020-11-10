@@ -1,6 +1,7 @@
 package com.bcnit13.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,13 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.bcnit13.dto.Picture;
+import com.bcnit13.dto.PictureDto;
 import com.bcnit13.dto.Store;
+import com.bcnit13.dto.StoreDto;
 import com.bcnit13.services.PictureServiceImpl;
 import com.bcnit13.services.StoreServiceImpl;
 
@@ -30,66 +33,62 @@ public class Controller {
 	PictureServiceImpl pictureServiceImpl;
 
 	@PostMapping("/shops")
-	public ResponseEntity<Store> addStore(@RequestParam String name, String adress, int cap)  throws Exception {
-		
-			return new ResponseEntity<>(storeServiceImpl.createStore(name, adress, cap), HttpStatus.OK);
-		
+	public ResponseEntity<StoreDto> addStore(@RequestBody Store store) throws Exception {
+
+		return new ResponseEntity<>(StoreDto.fromStoreToDto(storeServiceImpl.newStore(store)), HttpStatus.OK);
+
 	}
 
 	@PostMapping("/shops/{ID}/pictures")
-	public ResponseEntity<Picture> addPicture(@PathVariable(name = "ID") Long ID, @RequestParam String title,
-			String author) throws Exception {
-		if (author == null || author == "") {
-			author = "anonymous";
+	public ResponseEntity<PictureDto> addPicture(@PathVariable(name = "ID") Long ID, @RequestBody Picture pic)
+			throws Exception {
+		if (pic.getAuthor() == null || pic.getAuthor() == "") {
+			pic.setAuthor("anonymous");
 		}
-		return new ResponseEntity<>(pictureServiceImpl.addPicture(title, author, storeServiceImpl.findStoreById(ID)),
-				HttpStatus.OK);
+		pic.setStore(storeServiceImpl.findStoreById(ID));
+		return new ResponseEntity<>(PictureDto.fromPictureToDto(pictureServiceImpl.newPicture(pic)), HttpStatus.OK);
 	}
 
 	@GetMapping("/shops/{ID}")
-	public ResponseEntity<String> findStoreById(@PathVariable(name = "ID") Long ID){
-		try {
-			
-			return new ResponseEntity<>(storeServiceImpl.findStoreById(ID).toString(), HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>("Store with id: "+ ID + " not found.", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<StoreDto> findStoreById(@PathVariable(name = "ID") Long ID) throws Exception {
+		return new ResponseEntity<>(StoreDto.fromStoreToDto(storeServiceImpl.findStoreById(ID)), HttpStatus.OK);
+
 	}
 
 	@GetMapping("/shops")
-	public ResponseEntity<List<Store>> findAllStores() throws Exception {
-		return new ResponseEntity<>(storeServiceImpl.findAllStore(), HttpStatus.OK);
+	public ResponseEntity<List<StoreDto>> findAllStores() throws Exception {
+		return new ResponseEntity<>(storeServiceImpl.findAllStore().stream().map(s -> StoreDto.fromStoreToDto(s))
+				.collect(Collectors.toList()), HttpStatus.OK);
 	}
 
 	@GetMapping("/shops/{ID}/pictures")
-	public ResponseEntity<List<Picture>> findAllPictures(@PathVariable(name = "ID") Long ID) throws Exception {
-		return new ResponseEntity<>(storeServiceImpl.showPicturesByShopId(ID), HttpStatus.OK);
+	public ResponseEntity<List<PictureDto>> findAllPictures(@PathVariable(name = "ID") Long ID) throws Exception {
+		return new ResponseEntity<>(storeServiceImpl.showPicturesByShopId(ID).stream()
+				.map(pic -> PictureDto.fromPictureToDto(pic)).collect(Collectors.toList()), HttpStatus.OK);
 	}
 
 	@GetMapping("/shops/{ID}/picture")
-	public ResponseEntity<String> findPictureById(@PathVariable(name = "ID") Long ID) throws Exception {
-		try {
-			
-		return new ResponseEntity<>(pictureServiceImpl.findPictureById(ID).toString(), HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>("Picture with id: "+ ID + " not found.", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	public ResponseEntity<PictureDto> findPictureById(@PathVariable(name = "ID") Long ID) throws Exception {
+
+		return new ResponseEntity<>(PictureDto.fromPictureToDto(pictureServiceImpl.findPictureById(ID)), HttpStatus.OK);
 	}
 
 	@PutMapping("/shops/{ID}")
-	public ResponseEntity<Store> editStore(@PathVariable(name = "ID") Long ID, @RequestParam String name, String adress,
-			int cap) throws Exception {
-		return new ResponseEntity<>(storeServiceImpl.updateStore(ID, name, adress, cap), HttpStatus.OK);
+	public ResponseEntity<StoreDto> editStore(@PathVariable(name = "ID") Long ID, @RequestParam String name,
+			String adress, int cap) throws Exception {
+		return new ResponseEntity<>(StoreDto.fromStoreToDto(storeServiceImpl.updateStore(ID, name, adress, cap)),
+				HttpStatus.OK);
 	}
 
 	@PutMapping("/shops/{ID}/picture")
-	public ResponseEntity<Picture> editPicture(@PathVariable(name = "ID") Long ID, @RequestParam String title,
+	public ResponseEntity<PictureDto> editPicture(@PathVariable(name = "ID") Long ID, @RequestParam String title,
 			String author, Long store_id) throws Exception {
 		if (author == null || author == "") {
 			author = "anonymous";
 		}
 		return new ResponseEntity<>(
-				pictureServiceImpl.editPicture(ID, title, author, storeServiceImpl.findStoreById(store_id)),
+				PictureDto.fromPictureToDto(
+						pictureServiceImpl.editPicture(ID, title, author, storeServiceImpl.findStoreById(store_id))),
 				HttpStatus.OK);
 	}
 

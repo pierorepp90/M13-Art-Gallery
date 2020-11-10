@@ -10,8 +10,17 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"GhostShop\",\r\n    \"adress\": \"Nowhere\",\r\n    \"capacity\": 1500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:8080/api/shops?name=GhostShop&adress=Nowhere 00&cap=1500",
+					"raw": "localhost:8080/api/shops",
 					"host": [
 						"localhost"
 					],
@@ -19,20 +28,6 @@
 					"path": [
 						"api",
 						"shops"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "GhostShop"
-						},
-						{
-							"key": "adress",
-							"value": "Nowhere 00"
-						},
-						{
-							"key": "cap",
-							"value": "1500"
-						}
 					]
 				},
 				"description": "Create a new Store.\r\n\r\nParameters:\r\n*name(String)\r\n*adress(String)\r\n*cap(int)"
@@ -44,8 +39,17 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Girl with a Pearl Earring\",\r\n    \"author\": \"Johannes Vermeer\",\r\n    \"date\": \"2020-11-10T10:33:41.000+00:00\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:8080/api/shops/2/pictures?title=Girl with a Pearl Earring&author=Johannes Vermeer",
+					"raw": "localhost:8080/api/shops/2/pictures",
 					"host": [
 						"localhost"
 					],
@@ -55,16 +59,6 @@
 						"shops",
 						"2",
 						"pictures"
-					],
-					"query": [
-						{
-							"key": "title",
-							"value": "Girl with a Pearl Earring"
-						},
-						{
-							"key": "author",
-							"value": "Johannes Vermeer"
-						}
 					]
 				}
 			},

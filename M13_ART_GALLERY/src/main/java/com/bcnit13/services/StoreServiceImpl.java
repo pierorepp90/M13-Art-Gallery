@@ -19,6 +19,10 @@ public class StoreServiceImpl implements IStoreService {
 	public Store createStore(String name, String adress, int capacity) {
 		return iStoreDao.save(new Store(name, adress, capacity));
 	}
+	@Override
+	public Store newStore(Store store) {
+		return iStoreDao.save(store);
+	}
 
 	@Override
 	public List<Store> findAllStore() {
@@ -49,6 +53,8 @@ public class StoreServiceImpl implements IStoreService {
 		iStoreDao.deleteById(id);
 
 	}
+
+
 
 
 

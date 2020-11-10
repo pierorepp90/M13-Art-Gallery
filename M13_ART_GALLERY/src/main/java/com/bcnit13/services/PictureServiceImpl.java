@@ -17,6 +17,11 @@ public class PictureServiceImpl implements IPictureService {
 	public Picture addPicture(String title, String author, Store store_id) {
 		return iPictureDao.save(new Picture(title, author, store_id));
 	}
+	
+	@Override
+	public Picture newPicture(Picture pic) {
+		return iPictureDao.save(pic);
+	}
 
 	@Override
 	public Picture findPictureById(Long id) {
@@ -41,6 +46,8 @@ public class PictureServiceImpl implements IPictureService {
 	public void deleteAll() {
 		iPictureDao.deleteAll();
 	}
+
+
 
 
 

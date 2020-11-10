@@ -8,6 +8,8 @@ import com.bcnit13.dto.Store;
 public interface IStoreService {
 
 	public Store createStore(String name, String adress, int capacity);
+	
+	public Store newStore(Store store);
 
 	public List<Store> findAllStore();
 
